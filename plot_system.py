@@ -18,7 +18,7 @@ def rk4_step(x, y, dt):
     return x_next, y_next
 
 
-def integrate_trajectory(x0, y0, t_end, dt, max_abs=1e3):
+def integrate_trajectory(x0, y0, t_end, dt):
     steps = int(t_end / dt)
     xs = np.empty(steps + 1)
     ys = np.empty(steps + 1)
@@ -30,8 +30,6 @@ def integrate_trajectory(x0, y0, t_end, dt, max_abs=1e3):
         x, y = rk4_step(x, y, dt)
         xs[i + 1] = x
         ys[i + 1] = y
-        if not np.isfinite(x) or not np.isfinite(y) or abs(x) > max_abs or abs(y) > max_abs:
-            return xs[: i + 2], ys[: i + 2]
     return xs, ys
 
 
